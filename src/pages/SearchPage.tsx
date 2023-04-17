@@ -1,24 +1,18 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import {
-  Button,
   Container,
   Grid,
   Typography,
-  Box,
   TextField,
   InputAdornment,
 } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import { newsApiService } from "service/NewsApi.service"; // Import the newsApiService
 import { Article } from "types/Article";
 import BackdropProgress from "components/Common/BackdropProgress";
-import { Link } from "react-router-dom";
 import useFilterNews from "hooks/useFilterNews";
 import { Search } from "@mui/icons-material";
 import { useCountry } from "context/CountryContext";
+import ArticalCard from "components/Common/ArticalCard";
 
 export function SearchPage() {
   const [topNews, setTopNews] = useState<Article[]>([]); // State to hold the top news articles
@@ -95,78 +89,7 @@ export function SearchPage() {
           {topNews.length > 0 ? (
             topNews.map((article, index) => (
               <Grid item xs={12} md={6} lg={4} key={index}>
-                {/* Render the card component for each article */}
-                <Card
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "start",
-                    height: "100%",
-                  }}
-                >
-                  {/* Card content */}
-                  {/* Render the article title */}
-                  <CardHeader
-                    title={article.title}
-                    titleTypographyProps={{ variant: "h6" }}
-                    className="ellipse-2-line"
-                  />
-                  {/* Render the article image */}
-                  <Box
-                    sx={{
-                      height: "12.125rem",
-                      backgroundImage: `url(${article.urlToImage})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                    }}
-                  ></Box>
-                  {/* Render the article description */}
-                  <CardContent>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                      className="ellipse-3-line"
-                    >
-                      {article.description}
-                    </Typography>
-                  </CardContent>
-
-                  {/* Card actions */}
-                  {/* Render the article source and publish date */}
-                  <CardActions>
-                    <Typography
-                      variant="subtitle2"
-                      color="textSecondary"
-                      component="span"
-                      className="ellipse-1-line"
-                    >
-                      {article.source.name}
-                    </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      color="textSecondary"
-                      component="span"
-                    >
-                      {new Date(article.publishedAt).toDateString()}
-                    </Typography>
-                  </CardActions>
-
-                  {/* Render the read more button */}
-                  <CardActions>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      color="primary"
-                      href={article.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Link to="/newsDetail">Read More</Link>
-                    </Button>
-                  </CardActions>
-                </Card>
+                <ArticalCard article={article} />
               </Grid>
             ))
           ) : keyword && !isLoading && isShowNoRecord ? (

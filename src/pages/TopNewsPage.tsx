@@ -1,14 +1,10 @@
 import { useState, useEffect } from "react";
-import { Button, Container, Grid, Typography, Box } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
+import { Container, Grid, Typography } from "@mui/material";
 import { newsApiService } from "service/NewsApi.service"; // Import the newsApiService
 import { Article } from "types/Article";
 import BackdropProgress from "components/Common/BackdropProgress";
 import { useCountry } from "context/CountryContext";
-import { Link } from "react-router-dom";
+import ArticalCard from "components/Common/ArticalCard";
 
 export function TopNewsPage() {
   const [topNews, setTopNews] = useState<Article[]>([]); // State to hold the top news articles
@@ -44,47 +40,7 @@ export function TopNewsPage() {
         <Grid container spacing={2}>
           {topNews.map((article, index) => (
             <Grid item xs={12} md={6} lg={4} key={index}>
-              <Card
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "start",
-                  height: "100%",
-                }}
-              >
-                <CardHeader
-                  title={article.title}
-                  titleTypographyProps={{ variant: "h6" }}
-                  className="ellipse-2-line"
-                />
-                <Box
-                  sx={{
-                    height: "12.125rem",
-                    backgroundImage: `url(${article.urlToImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                ></Box>
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    className="ellipse-3-line"
-                    sx={{ height: "60px" }}
-                  >
-                    {article.description}
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  disableSpacing
-                  sx={{ justifyContent: "end", pt: 0 }}
-                >
-                  <Button size="large">
-                    <Link to="/newsDetail">Read More</Link>
-                  </Button>
-                </CardActions>
-              </Card>
+              <ArticalCard article={article} />
             </Grid>
           ))}
         </Grid>

@@ -1,7 +1,7 @@
 import { NewsApiResponse } from "types/APIService";
 
 export class newsApiService {
-  static API_Key = "5ea09112bbe94458ace3d640202269de";
+  static API_Key = "dc548159a22c46c8974ef05b2a26c950";
 
   public static fetchTopHeadlines = async (
     country: string,

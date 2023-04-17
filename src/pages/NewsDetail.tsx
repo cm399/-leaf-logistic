@@ -1,59 +1,69 @@
 import { Button, Container, Grid, Typography, Box } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import { Link } from "react-router-dom";
-import { useCountry } from "context/CountryContext";
+import { formatDateString } from "utils/commonUils";
 
 const NewsDetail = () => {
-  const { country } = useCountry();
+  const data = {
+    source: { id: null, name: "KTLA Los Angeles" },
+    author: "Vivian Chow",
+    title:
+      "Frozen strawberries sold at Costco, Trader Joe’s linked to Hepatitis A outbreak in Los Angeles County - KTLA Los Angeles",
+    description:
+      "Health officials are warning of an outbreak of hepatitis A infections linked to frozen strawberries sold in stores across Los Angeles County. The outbreak was recently identified by the Los Angeles County of Department of Public Health. Several brands of froz…",
+    url: "https://ktla.com/news/local-news/frozen-strawberries-sold-at-costco-trader-joes-linked-to-hepatitis-a-outbreak-in-los-angeles-county/",
+    urlToImage:
+      "https://ktla.com/wp-content/uploads/sites/4/2022/05/GettyImages-464646860.jpg?w=1280",
+    publishedAt: "2023-04-16T03:01:42Z",
+    content:
+      "Health officials are warning of an outbreak of hepatitis A infections linked to frozen strawberries sold in stores across Los Angeles County.\r\nThe outbreak was recently identified by the Los Angeles … [+2153 chars]",
+  };
 
   return (
     <>
       <Container maxWidth="xl" sx={{ pb: 3 }}>
-        <Typography variant="h4" my={2}>
-          Top News from {country === "gb" ? "Great Britain" : "United State"}
+        <Typography variant="h5" my={2}>
+          {data.title}
         </Typography>
-
         <Grid container spacing={2}>
-          <Grid item xs={12} md={6} lg={4}>
-            <Card
+          <Grid item xs={12} md={12} lg={12}>
+            <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "start",
-                height: "100%",
+                height: "12.125rem",
+                width: "100%",
+                backgroundImage: `url("${data.urlToImage}")`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
               }}
-            >
-              <CardHeader
-                title="Das war die bisher gewaltigste Rakete aller Zeiten"
-                titleTypographyProps={{ variant: "h6" }}
-              />
-              <Box
-                sx={{
-                  height: "12.125rem",
-                  backgroundImage:
-                    'url("https://img.welt.de/img/geschichte/mobile244760620/5911359057-ci16x9-w1200/Alabama-Huntsville-US-Space-Rocket-Center.jpg")',
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                }}
-              ></Box>
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  "Elon Musks Starship soll den Rekord der Saturn V knacken.
-                  Fast 56 Jahre lang war Wernher von Brauns Mondrakete das
-                  größte und lauteste fliegende Objekt, das Menschen geschaffen
-                  hatten. Ihr Schöpfer träumte von noch Größerem."
+            ></Box>
+            <Box display="flex" flexWrap="wrap" gap={{ xs: 1, md: 2 }}>
+              <Box>
+                <Typography variant="body1" my={2}>
+                  <strong>Published On:</strong>{" "}
+                  {formatDateString(data.publishedAt, "DD MMM YYYY hh:mm A")}
                 </Typography>
-              </CardContent>
-              <CardActions disableSpacing sx={{ justifyContent: "end", pt: 0 }}>
-                <Button size="large">
-                  <Link to="/">Back to List</Link>
-                </Button>
-              </CardActions>
-            </Card>
+              </Box>
+              <Box>
+                <Typography variant="body1" my={2}>
+                  <strong>Source:</strong> {data.source.name}
+                </Typography>
+              </Box>
+              <Box>
+                <Typography variant="body1" my={2}>
+                  <strong>Author:</strong> {data.author}
+                </Typography>
+              </Box>
+            </Box>
+            <Box sx={{ pb: 2 }}>
+              <Typography variant="body2" color="text.secondary">
+                {data.description}
+              </Typography>
+            </Box>
+            <Box sx={{ justifyContent: "end", mt: 2 }}>
+              <Button size="large" sx={{ p: 0 }}>
+                <Link to="/">Back to List</Link>
+              </Button>
+            </Box>
           </Grid>
         </Grid>
       </Container>

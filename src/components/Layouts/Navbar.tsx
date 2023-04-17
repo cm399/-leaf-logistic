@@ -8,7 +8,7 @@ import {
   Menu,
   MenuItem,
   Button,
-  Tooltip,
+  ButtonGroup,
 } from "@mui/material";
 import { MouseEvent, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -103,7 +103,28 @@ const Navbar = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="GB">
+              <ButtonGroup
+                variant="outlined"
+                aria-label="outlined button group"
+                color="warning"
+                sx={{
+                  "& .MuiButton-outlined": { backgroundColor: "grey.200" },
+                }}
+              >
+                <Button
+                  variant={country === "gb" ? "contained" : "outlined"}
+                  onClick={() => setCountryData("gb")}
+                >
+                  GB
+                </Button>
+                <Button
+                  variant={country === "us" ? "contained" : "outlined"}
+                  onClick={() => setCountryData("us")}
+                >
+                  US
+                </Button>
+              </ButtonGroup>
+              {/* <Tooltip title="GB">
                 <IconButton sx={{ p: 1 }} onClick={() => setCountryData("gb")}>
                   <Box
                     component="img"
@@ -130,7 +151,7 @@ const Navbar = () => {
                     }}
                   />
                 </IconButton>
-              </Tooltip>
+              </Tooltip> */}
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
