@@ -55,7 +55,14 @@ const ArticalCard = ({ article }: { article: Article }) => {
         sx={{ justifyContent: "end", py: 0, mtt: "auto" }}
       >
         <Button size="large" sx={{ m: 1 }}>
-          <Link to="/newsDetail">Read More</Link>
+          <Link
+            to={{
+              pathname: "/newsDetail",
+              state: article,
+            }}
+          >
+            Read More
+          </Link>
         </Button>
       </CardActions>
     </Card>
